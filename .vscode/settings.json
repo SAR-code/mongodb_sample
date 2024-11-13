@@ -1,0 +1,26 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.formatOnSave": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#48f562f1",
+    "activityBar.activeBorder": "#eeebec",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#9786f8",
+    "activityBarBadge.foreground": "#15202b",
+    "titleBar.activeBackground": "#18f239f1",
+    "titleBar.inactiveBackground": "#18f23999",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveForeground": "#15202b99",
+    "statusBar.background": "#18f239f1",
+    "statusBarItem.hoverBackground": "#0bcc29f1",
+    "statusBar.foreground": "#15202b",
+    "activityBar.activeBackground": "#48f562f1",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#48f562f1",
+    "statusBarItem.remoteBackground": "#18f239f1",
+    "statusBarItem.remoteForeground": "#15202b"
+  },
+  "peacock.color": "#18f239f1",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
