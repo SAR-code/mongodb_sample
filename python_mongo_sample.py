@@ -17,6 +17,7 @@ try:
 except pymongo.errors.ConfigurationError:
   print("An Invalid URI host error was received. Is your Atlas host name correct in your connection string?")
   sys.exit(1)
+  
 
 # use a database named "myDatabase"
 db = client.myDatabase
