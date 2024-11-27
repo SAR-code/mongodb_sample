@@ -1,6 +1,7 @@
 # Get the database using the methond we defined in pymongo_test_insert file
 
-from pymongo_get_database import get_database
+from ..pymongo_get_database import get_database
+
 from dateutil import parser
 
 # retrieves the database
