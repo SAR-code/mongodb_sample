@@ -2,6 +2,8 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 def get_database():
     
     # Provide the connection string to connect to the database
@@ -14,7 +16,7 @@ def get_database():
     client = MongoClient(CONNECTION_STRING)
     
     # creates a database
-    return client ['user_shopping_list']
+    return client ['CRUD_TODO_APP']
 
 # Added for other files to reuse the get_database function
     
