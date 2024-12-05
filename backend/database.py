@@ -11,10 +11,11 @@ reference: FARMSTACK Tutorial by @bekbrace
 # MongoDB driver
 from motor.motor_asyncio import AsyncIOMotorClient
 from model import Todo
+import os
 #from bson import ObjectId
 
 
-client = AsyncIOMotorClient('mongodb://localhost:27017/')
+client = AsyncIOMotorClient(os.getenv('DB_SHORT'))
 
 database = client.TodoList
 collection = database.todo
