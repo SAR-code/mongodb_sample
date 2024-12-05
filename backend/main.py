@@ -9,15 +9,16 @@ reference: FARMSTACK Tutorial from @bekbrace
 # Retrieving the required modules
 
 from fastapi import FastAPI, HTTPException
-
-from model import Todo
+#from pydantic import BaseModel
+from model import Todo, TodoCreate
 
 from database import (
     fetch_one_todo,
     fetch_all_todos,
-    create_todo,
+    #create_todo,
     update_todo,
     remove_todo,
+    todo_create,
 )
 
 # HTTP exception class to display exception information
@@ -27,8 +28,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    
-    
+
 ]
 
 # middleware defined
@@ -60,12 +60,12 @@ async def get_todo_by_title(title):
         return response
     raise HTTPException(404, f"There is no todo with the title {title}")
 
-@app.post("/api/todo/", response_model=Todo)
-async def post_todo(todo: Todo):
-    response = await create_todo(todo.model_dump())
-    if response:
-        return response
-    raise HTTPException(400, "Something went wrong")
+# @app.post("/api/todo/", response_model=Todo)
+# async def post_todo(todo: TodoCreate):
+#     response = await create_todo(todo.model_dump())
+#     if response:
+#         return response
+#     raise HTTPException(400, "Something went wrong")
 
 @app.put("/api/todo/{title}/", response_model=Todo)
 async def put_todo(title: str, desc: str):
@@ -80,3 +80,12 @@ async def delete_todo(title):
     if response:
         return "Todo successfully deleted"
     raise HTTPException(404, f"There is no todo with the title {title}")
+
+@app.post("/api/todo/", response_model=TodoCreate)
+async def create_todo_route(todo: Todo):
+    
+    created_item = await todo_create(todo)
+    if created_item:
+        return created_item
+    else:
+        raise HTTPException(status_code=400, details="Todo creation failed")

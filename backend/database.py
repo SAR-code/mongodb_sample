@@ -9,11 +9,12 @@ reference: FARMSTACK Tutorial by @bekbrace
 # Declare required modules
 
 # MongoDB driver
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
 from model import Todo
+#from bson import ObjectId
 
 
-client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://localhost:27017/')
+client = AsyncIOMotorClient('mongodb://localhost:27017/')
 
 database = client.TodoList
 collection = database.todo
@@ -30,10 +31,10 @@ async def fetch_all_todos():
         todos.append(Todo(**document))
     return todos
 
-async def create_todo(todo):
-    document = todo
-    result = await collection.insert_one(document)
-    return result
+# async def create_todo(todo):
+#     document = todo
+#     result = await collection.insert_one(document)
+#     return result
 
 async def update_todo(title, desc):
     await collection.update_one({"title": title}, {"$set":{"description": desc}})
@@ -44,5 +45,15 @@ async def remove_todo(title):
     await collection.delete_one({"title":title})
     return True
 
-
+async def todo_create(todo: Todo):
+    
+    result = await collection.insert_one(todo.model_dump())
+    created_item = await collection.find_one({"_id": result.inserted_id})
+    
+    if created_item:
+        created_item["id"] = str(created_item["_id"])
+        del created_item["_id"]
+        return created_item
+    
+    return None
 
