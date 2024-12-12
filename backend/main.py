@@ -38,7 +38,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins = origins,
     allow_credentials = True,
-    allow_methods = ["*"],
+    allow_methods = ["GET","POST","DELETE","PUT","OPTIONS"],
     allow_headers = ["*"],
 )
 
@@ -60,12 +60,6 @@ async def get_todo_by_title(title):
         return response
     raise HTTPException(404, f"There is no todo with the title {title}")
 
-# @app.post("/api/todo/", response_model=Todo)
-# async def post_todo(todo: TodoCreate):
-#     response = await create_todo(todo.model_dump())
-#     if response:
-#         return response
-#     raise HTTPException(400, "Something went wrong")
 
 @app.put("/api/todo/{title}/", response_model=Todo)
 async def put_todo(title: str, desc: str):
