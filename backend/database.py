@@ -20,6 +20,7 @@ client = AsyncIOMotorClient(os.getenv('DB_SHORT'))
 database = client.TodoList
 collection = database.todo
 
+# CRUD Actions
 
 async def fetch_one_todo(title):
     document = await collection.find_one({"title": title})
